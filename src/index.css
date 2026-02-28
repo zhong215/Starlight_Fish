@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+SC:wght@100;200;300;400;500&family=Inter:wght@100;200;300;400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Noto Serif SC", "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+:root {
+  --deep-sea-bg: #030712;
+  --ink-black: #020617;
+  --paper-white: #f8fafc;
+}
+
+body {
+  background-color: var(--deep-sea-bg);
+  color: var(--paper-white);
+  overflow: hidden;
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Vertical text support */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Ink bleed animation */
+@keyframes inkBleed {
+  0% { filter: blur(10px); opacity: 0; transform: scale(0.95); }
+  100% { filter: blur(0); opacity: 1; transform: scale(1); }
+}
+
+.ink-text {
+  animation: inkBleed 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Breathing effect refined */
+@keyframes breatheRefined {
+  0%, 100% { opacity: 0.4; letter-spacing: 0.1em; }
+  50% { opacity: 0.9; letter-spacing: 0.15em; }
+}
+
+.breathing-ink {
+  animation: breatheRefined 6s ease-in-out infinite;
+}
+
+/* Divine Breathing for Moonlight Vine */
+@keyframes divineBreathing {
+  0%, 100% { 
+    filter: brightness(1) blur(0.5px); 
+    opacity: 0.85;
+  }
+  50% { 
+    filter: brightness(1.3) blur(1px); 
+    opacity: 1;
+  }
+}
+
+.divine-breathe {
+  animation: divineBreathing 5s ease-in-out infinite;
+}
+
+/* Stardust Glow - 星辰散落发光动画（清晰版）*/
+@keyframes stardustGlow {
+  0%, 100% { 
+    text-shadow: 
+      0 0 10px rgba(253, 224, 71, 0.5),
+      0 0 20px rgba(255, 255, 255, 0.4),
+      0 0 30px rgba(191, 219, 254, 0.2);
+    filter: brightness(1.1);
+    letter-spacing: 0.8em;
+    opacity: 0.95;
+  }
+  50% { 
+    text-shadow: 
+      0 0 18px rgba(253, 224, 71, 0.7),
+      0 0 30px rgba(255, 255, 255, 0.6),
+      0 0 45px rgba(191, 219, 254, 0.3),
+      0 0 65px rgba(253, 224, 71, 0.25);
+    filter: brightness(1.5);
+    letter-spacing: 0.85em;
+    opacity: 1;
+  }
+}
+
+/* Bioluminescent Glow - 海中浮游生物发光 */
+@keyframes bioluminescentGlow {
+  0%, 100% { 
+    text-shadow: 
+      0 0 8px rgba(94, 234, 212, 0.6),
+      0 0 15px rgba(56, 189, 248, 0.4),
+      0 0 25px rgba(14, 165, 233, 0.3),
+      0 0 40px rgba(94, 234, 212, 0.2);
+    filter: brightness(1.2) saturate(1.3);
+    opacity: 0.9;
+  }
+  33% { 
+    text-shadow: 
+      0 0 12px rgba(94, 234, 212, 0.8),
+      0 0 22px rgba(56, 189, 248, 0.6),
+      0 0 35px rgba(14, 165, 233, 0.4),
+      0 0 55px rgba(94, 234, 212, 0.3);
+    filter: brightness(1.5) saturate(1.5);
+    opacity: 1;
+  }
+  66% { 
+    text-shadow: 
+      0 0 10px rgba(94, 234, 212, 0.7),
+      0 0 18px rgba(56, 189, 248, 0.5),
+      0 0 30px rgba(14, 165, 233, 0.35),
+      0 0 45px rgba(94, 234, 212, 0.25);
+    filter: brightness(1.35) saturate(1.4);
+    opacity: 0.95;
+  }
+}
+
+.bioluminescent-text {
+  animation: bioluminescentGlow 4.5s ease-in-out infinite;
+}
+
+/* 星光点缀伪元素动画 */
+@keyframes stardustSparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  20%, 80% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.stardust-text {
+  position: relative;
+  display: inline-block;
+}
+
+.stardust-text::before,
+.stardust-text::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(253, 224, 71, 0.9) 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 8px rgba(253, 224, 71, 0.6), 0 0 15px rgba(255, 255, 255, 0.4);
+  animation: stardustSparkle 5s ease-in-out infinite;
+}
+
+.stardust-text::before {
+  top: -8px;
+  left: 20%;
+}
+
+.stardust-text::after {
+  bottom: -8px;
+  right: 25%;
+  animation-delay: 2.5s;
+}
+
+/* Flashlight Breath - 手电筒呼吸动画 */
+@keyframes flashlightBreath {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* Sacred Glow - 神圣柔和发光动画 */
+@keyframes sacredGlow {
+  0%, 100% { 
+    opacity: 0.7;
+    filter: brightness(0.95);
+  }
+  50% { 
+    opacity: 1;
+    filter: brightness(1.05);
+  }
+}
+
+.sacred-glow {
+  animation: sacredGlow 5s ease-in-out infinite;
+}
+
+.sacred-glow-delayed {
+  animation: sacredGlow 6s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+/* Underline Light Slide - 下划线光滑动效果 */
+@keyframes underlineSlide {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.underline-slide {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-slide::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(90deg, 
+    rgba(165, 180, 252, 0) 0%, 
+    rgba(165, 180, 252, 0.3) 20%,
+    rgba(165, 180, 252, 0.9) 50%, 
+    rgba(165, 180, 252, 0.3) 80%,
+    rgba(165, 180, 252, 0) 100%
+  );
+  mask-image: linear-gradient(90deg, 
+    transparent 0%, 
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(90deg, 
+    transparent 0%, 
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  box-shadow: 0 0 6px rgba(165, 180, 252, 0.4), 0 0 10px rgba(165, 180, 252, 0.2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+.underline-slide:hover::after {
+  transform: scaleX(1);
+}
+
+/* Text Gentle Breath - 轻柔字体呼吸 */
+@keyframes textGentleBreath {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.text-gentle-breath {
+  animation: textGentleBreath 4s ease-in-out infinite;
+}
+
+/* Subtle paper texture overlay */
+.paper-texture::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Motion Typography - Breathing */
+@keyframes textBreathe {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.text-breathe {
+  animation: textBreathe 8s ease-in-out infinite;
+}
+
+/* Motion Typography - Chromatic Aberration on Hover/Move */
+.chromatic-text {
+  transition: text-shadow 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.chromatic-text:hover {
+  text-shadow: 
+    -3px 0 5px rgba(94, 234, 212, 0.6), /* Teal */
+    3px 0 5px rgba(167, 139, 250, 0.6); /* Indigo */
+  transform: scale(1.01);
+}
+
+/* Ethereal Sacred Spacing */
+.sacred-spacing {
+  letter-spacing: 0.25em;
+}
+.sacred-spacing-lg {
+  letter-spacing: 0.4em;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}

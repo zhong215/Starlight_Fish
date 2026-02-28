@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音频测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a2e;
+            color: #fff;
+        }
+        button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #00d4ff;
+            border: none;
+            border-radius: 5px;
+            color: #1a1a2e;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #00b8e6;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        .error {
+            background: rgba(255, 0, 0, 0.2);
+        }
+        .success {
+            background: rgba(0, 255, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>🐋 鲸鱼音频测试</h1>
+    <div>
+        <button onclick="testAudio(1)">测试音频 1</button>
+        <button onclick="testAudio(2)">测试音频 2</button>
+        <button onclick="testAudio(3)">测试音频 3</button>
+        <button onclick="testAudio(4)">测试音频 4</button>
+        <button onclick="testRandom()">随机播放</button>
+    </div>
+    <div id="status" class="status">等待测试...</div>
+    
+    <script>
+        let currentAudio = null;
+        
+        function log(message, isError = false) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = 'status ' + (isError ? 'error' : 'success');
+            console.log(message);
+        }
+        
+        function testAudio(index) {
+            // 停止当前播放
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+            
+            const path = `/sounds/whale/whale-call-${index}.mp3`;
+            log(`正在加载: ${path}`);
+            
+            currentAudio = new Audio(path);
+            currentAudio.volume = 0.7;
+            
+            currentAudio.addEventListener('loadeddata', () => {
+                log(`✓ 音频 ${index} 加载成功，时长: ${currentAudio.duration.toFixed(2)}秒`);
+            });
+            
+            currentAudio.addEventListener('error', (e) => {
+                log(`✗ 音频 ${index} 加载失败: ${e.type}`, true);
+            });
+            
+            currentAudio.play()
+                .then(() => {
+                    log(`▶ 正在播放音频 ${index}`);
+                })
+                .catch(err => {
+                    log(`✗ 播放失败: ${err.message}`, true);
+                });
+        }
+        
+        function testRandom() {
+            const randomIndex = Math.floor(Math.random() * 4) + 1;
+            testAudio(randomIndex);
+        }
+        
+        // 页面加载时的初始化
+        window.addEventListener('load', () => {
+            log('页面已加载，点击按钮测试音频播放');
+        });
+    </script>
+</body>
+</html>
