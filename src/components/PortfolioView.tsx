@@ -1180,7 +1180,7 @@ export const PortfolioView: React.FC<PortfolioViewProps> = ({
         />
         
         {/* Section Header */}
-        <div className="relative mb-48 flex flex-col items-center text-center">
+        <div className="relative mb-[80vh] flex flex-col items-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

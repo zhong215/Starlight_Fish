@@ -51,7 +51,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ title, subtitle,
   };
 
   return (
-    <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-4 flex flex-col items-center justify-center min-h-[92vh] perspective-2000">
+    <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-4 pt-40 flex flex-col items-center justify-center min-h-[88vh] perspective-2000">
       {/* Header Info - Refined for better breathing room */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}

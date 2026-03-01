@@ -92,7 +92,7 @@ const BubbleButton: React.FC<BubbleButtonProps> = ({
           <div className="absolute w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_15px_#fff]"></div>
           {/* 内容排版：保持竖排禅意 */}
           <div className="relative flex flex-col items-center tracking-[1.2em] text-white/60 group-hover:text-white transition-all duration-1000">
-            <span className={`${isLeftDirection ? '[writing-mode:vertical-lr]' : '[writing-mode:vertical-rl]'} font-extralight text-lg select-none`}>
+            <span className={`${isLeftDirection ? '[writing-mode:vertical-lr]' : '[writing-mode:vertical-rl]'} font-extralight text-base select-none`}>
               与我联系
             </span>
           </div>
