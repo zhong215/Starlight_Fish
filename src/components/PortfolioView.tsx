@@ -6,6 +6,7 @@ import { FlashlightOverlay } from './FlashlightOverlay';
 import { WhaleCallButton } from './WhaleCallButton';
 import { EtherealExploreButton } from './EtherealExploreButton';
 import BubbleButton from './BubbleButton';
+import { RotationIndicator } from './RotationIndicator';
 
 interface FishPosition {
   x: number;
@@ -1210,6 +1211,11 @@ export const PortfolioView: React.FC<PortfolioViewProps> = ({
                 <p className="bioluminescent-text text-cyan-100 text-[10px] tracking-[0.8em] uppercase font-light" style={{fontFamily: '"Cormorant Garamond", serif'}}>Let there be Light</p>
               </div>
             </FlashlightOverlay>
+            
+            {/* 向下倒三角指示器 + 拨转文字 - 始终可见，不受手电筒影响 */}
+            <div className="mt-48 md:mt-56 lg:mt-64 flex justify-center">
+              <RotationIndicator />
+            </div>
           </motion.div>
           
 
