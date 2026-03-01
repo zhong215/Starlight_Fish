@@ -20,6 +20,11 @@ export const SnowParticles: React.FC<SnowParticlesProps> = ({ zIndex = 6 }) => {
     if (!containerRef.current) return;
     
     const container = containerRef.current; // 保存引用用于清理
+    
+    // 移动设备检测和性能优化
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                     window.innerWidth < 768;
+    const isLowEndDevice = isMobile && (navigator.hardwareConcurrency || 0) <= 4;
 
     // 初始化场景
     const scene = new THREE.Scene();
@@ -39,14 +44,21 @@ export const SnowParticles: React.FC<SnowParticlesProps> = ({ zIndex = 6 }) => {
     cameraRef.current = camera;
 
     // 初始化渲染器
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: true,
-      alpha: true // 透明背景
-    });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
-    rendererRef.current = renderer;
+    let renderer: THREE.WebGLRenderer | null = null;
+    try {
+      renderer = new THREE.WebGLRenderer({ 
+        antialias: !isMobile, // 移动端禁用抗锯齿以提高性能
+        alpha: true, // 透明背景
+        powerPreference: isMobile ? 'low-power' : 'high-performance'
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 2));
+      container.appendChild(renderer.domElement);
+      rendererRef.current = renderer;
+    } catch (error) {
+      console.error('WebGL not supported:', error);
+      return; // 如果WebGL不支持，直接返回
+    }
 
     // 创建粒子纹理
     function createCircleTexture(blur: number = 0.5): THREE.CanvasTexture {
@@ -68,7 +80,8 @@ export const SnowParticles: React.FC<SnowParticlesProps> = ({ zIndex = 6 }) => {
 
     // 创建主粒子系统
     function createParticles() {
-      const count = 3500;
+      // 根据设备性能调整粒子数量
+      const count = isLowEndDevice ? 800 : (isMobile ? 1500 : 3500);
       const geometry = new THREE.BufferGeometry();
       const pos = new Float32Array(count * 3);
       const extra = new Float32Array(count * 3); // [speed, phase, size_mult]

@@ -496,9 +496,15 @@ export const DeepSeaCanvas: React.FC<DeepSeaCanvasProps> = ({
     let width = window.innerWidth;
     let height = window.innerHeight;
 
+    // 移动设备检测和性能优化
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                     window.innerWidth < 768;
+    const isLowEndDevice = isMobile && (navigator.hardwareConcurrency || 0) <= 4;
+    
     // 声明所有变量
     const particles: (BokehParticle & { lifeProgress: number })[] = [];
-    const FISH_COUNT = 800;
+    // 根据设备性能调整鱼群数量
+    const FISH_COUNT = isLowEndDevice ? 150 : (isMobile ? 300 : 800);
     const fishArray: MinimalFish[] = [];
     const lightParticles: LightParticle[] = [];
     const schoolMouse = { x: -1000, y: -1000, active: false };

@@ -7,15 +7,20 @@ export function useAudio() {
   const initAudio = useCallback(() => {
     if (audioCtxRef.current) return;
     
-    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
-    const ctx = new AudioContext();
-    audioCtxRef.current = ctx;
+    try {
+      const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioContext) {
+        console.warn('AudioContext not supported on this device');
+        return;
+      }
+      const ctx = new AudioContext();
+      audioCtxRef.current = ctx;
 
-    // Background Ambient: Ethereal Sea
-    const bgGain = ctx.createGain();
-    bgGain.gain.value = 0; // Start silent, fade in
-    bgGain.connect(ctx.destination);
-    bgGainRef.current = bgGain;
+      // Background Ambient: Ethereal Sea
+      const bgGain = ctx.createGain();
+      bgGain.gain.value = 0; // Start silent, fade in
+      bgGain.connect(ctx.destination);
+      bgGainRef.current = bgGain;
 
     // Create brown noise for sea waves
     const bufferSize = ctx.sampleRate * 2; // 2 seconds of noise
@@ -77,6 +82,10 @@ export function useAudio() {
 
     // Fade in
     bgGain.gain.setTargetAtTime(0.15, ctx.currentTime, 3);
+    } catch (error) {
+      console.error('Failed to initialize AudioContext:', error);
+      // 静默失败，不影响页面其他功能
+    }
   }, []);
 
   const playSwipeSound = useCallback((direction: 'up' | 'down' | 'left' | 'right' = 'up', speed: number = 1) => {
