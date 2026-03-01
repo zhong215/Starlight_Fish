@@ -51,8 +51,8 @@ class MinimalFish {
       // 基准角度：向上(-90°)或向下(+90°)
       const baseAngle = direction === 'up' ? -Math.PI / 2 : Math.PI / 2;
       
-      // 初始距离：10-80px，从裂缝中心涌出
-      const spawnDist = 10 + Math.random() * 70;
+      // 初始距离：0-50px，从裂缝中心逐渐涌出
+      const spawnDist = Math.random() * 50;
       
       // === S型曲线涌出（两个方向） ===
       // 使用正弦波创建S型，基于垂直距离
