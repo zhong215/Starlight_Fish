@@ -250,7 +250,7 @@ export default function App() {
                   </div>
 
                   <div className="flex flex-col items-center text-center space-y-20">
-                    <div className="serif text-xl md:text-2xl font-light leading-[2.8] tracking-[0.2em] text-white/70 ink-text breathing-ink max-w-3xl whitespace-pre-line">
+                    <div className="serif text-xl md:text-2xl font-light leading-[2.8] tracking-[0.2em] text-white/70 ink-text breathing-ink max-w-4xl whitespace-pre-line">
                       {dialogue[step]}
                     </div>
 
