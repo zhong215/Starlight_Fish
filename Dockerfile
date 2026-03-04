@@ -37,5 +37,5 @@ RUN echo '#!/bin/sh' > /docker-entrypoint.sh && \
 # 暴露端口（Zeabur 会使用 PORT 环境变量）
 EXPOSE 8080
 
-# 使用自定义启动脚本
-CMD ["/docker-entrypoint.sh"]
+# 强制使用自定义启动脚本（避免平台覆盖为 npm 命令）
+ENTRYPOINT ["/docker-entrypoint.sh"]
